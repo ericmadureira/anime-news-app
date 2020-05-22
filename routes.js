@@ -2,7 +2,9 @@ import React, { useMemo } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const { Navigator, Screen } = createStackNavigator();
-const routes = [];
+const routes = [
+  { name: 'Home', component: HomeScreen, title: 'Anime News' },
+];
 
 const Router = () => {
   const screens = useMemo(routes => (
@@ -12,7 +14,7 @@ const Router = () => {
   ), [routes]);
 
   return (
-    <Navigator>
+    <Navigator initialRouteName='Home'>
       {screens}
     </Navigator>
   );
