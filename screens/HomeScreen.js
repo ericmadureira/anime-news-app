@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 
 import API from '../services/api';
+import parsers from '../services/parsers';
 
 const HomeScreen = () => {
   const [recentAnimes, setRecentAnimes] = useState([]);
@@ -10,9 +11,9 @@ const HomeScreen = () => {
     try {
       const emptyList = Array.isArray(recentAnimes) && !recentAnimes.length;
       if (emptyList){
-        const list = await API.getRecentAnimes();
-        console.log('XML NO COMPONENT: ', list);
-        setRecentAnimes(list);
+        const { report: { item } } = await API.getRecentAnimes();
+        const parsedList = parsers.parseAnimeList(item);
+        setRecentAnimes(item);
       }
     } catch (e) {
       console.log(`Error while fetching data: ${e}`);
