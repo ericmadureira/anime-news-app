@@ -6,7 +6,7 @@ import API from '../services/api';
 const HomeScreen = () => {
   const [recentAnimes, setRecentAnimes] = useState([]);
 
-  const getRecentAnimes = useCallback(async () => {
+  const fetchRecentAnimes = useCallback(async () => {
     try {
       const emptyList = Array.isArray(recentAnimes) && !recentAnimes.length;
       if (emptyList){
@@ -15,13 +15,13 @@ const HomeScreen = () => {
         setRecentAnimes(list);
       }
     } catch (e) {
-      console.log('Error while fetching data.');
+      console.log(`Error while fetching data: ${e}`);
     };
   }, [recentAnimes, setRecentAnimes]);
 
   useEffect(() => {
-    getRecentAnimes();
-  }, [getRecentAnimes])
+    fetchRecentAnimes();
+  }, [fetchRecentAnimes])
 
   return (
     <View>
