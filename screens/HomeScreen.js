@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { FlatList, View } from 'react-native';
 
 import API from '../services/api';
 import parsers from '../services/parsers';
+import ListItem from '../components/ListItem';
 
 const HomeScreen = () => {
   const [recentAnimes, setRecentAnimes] = useState([]);
@@ -13,7 +14,7 @@ const HomeScreen = () => {
       if (emptyList){
         const { report: { item } } = await API.getRecentAnimes();
         const parsedList = parsers.parseAnimeList(item);
-        setRecentAnimes(item);
+        setRecentAnimes(parsedList);
       }
     } catch (e) {
       console.log(`Error while fetching data: ${e}`);
@@ -24,9 +25,17 @@ const HomeScreen = () => {
     fetchRecentAnimes();
   }, [fetchRecentAnimes])
 
+  const animes = useMemo(() => (
+    <FlatList
+      data={recentAnimes}
+      keyExtractor={item => item.id}
+      renderItem={({ item }) => <ListItem anime={item} />}
+    />
+  ), [recentAnimes]);
+
   return (
     <View>
-      <Text>Home screen</Text>
+      {animes}
     </View>
   );
 };
