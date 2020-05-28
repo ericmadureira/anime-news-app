@@ -1,6 +1,9 @@
 # Anime News feed
 
 ## How to run
-- [Expo docs](https://docs.expo.io/get-started/installation/)
+1. Follow the [Expo docs](https://docs.expo.io/get-started/installation/)
+
+## API
+[Reports and Anime details](https://www.animenewsnetwork.com/encyclopedia/api.php)
 
 React native app bootstraped with [expo](https://expo.io/).
