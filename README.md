@@ -1,5 +1,9 @@
 # Anime News feed
 
+## Features
+- List of recently added animes
+- Details for these animes
+
 ## How to run
 1. Follow the [Expo docs](https://docs.expo.io/get-started/installation/)
 
