@@ -12,8 +12,8 @@ const HomeScreen = () => {
     try {
       const emptyList = Array.isArray(recentAnimes) && !recentAnimes.length;
       if (emptyList){
-        const { report: { item } } = await API.getRecentAnimes();
-        const parsedList = parsers.parseAnimeList(item);
+        const result = await API.getRecentAnimes();
+        const parsedList = parsers.parseAnimeList(result);
         setRecentAnimes(parsedList);
       }
     } catch (e) {
